@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Website</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to Our Store</h1>
+    <p>Discover premium products crafted just for you.</p>
+    <button class="shop-now-btn">Shop Now</button>
+  </section>
+
+  <!-- Best Sellers Section -->
+  <section id="best-sellers">
+    <h2>Best Sellers</h2>
+    <div class="product-list">
+      <div class="product-item">
+        <img src="assets/images/product_1.png" alt="Wireless Headphones">
+        <h3>Wireless Headphones</h3>
+        <p>$50.00</p>
+      </div>
+      <div class="product-item">
+        <img src="assets/images/product_2.png" alt="Bluetooth Speaker">
+        <h3>Bluetooth Speaker</h3>
+        <p>$30.00</p>
+      </div>
+      <div class="product-item">
+        <img src="assets/images/product_3.png" alt="Smart Watch">
+        <h3>Smart Watch</h3>
+        <p>$80.00</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Section -->
+  <section id="products">
+    <h2>More Products</h2>
+    <div class="compact-product-grid"></div>
+    <div class="pagination">
+      <button id="prev-btn" onclick="changePage(-1)">Previous</button>
+      <span id="page-info">Page 1 of 2</span>
+      <button id="next-btn" onclick="changePage(1)">Next</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 My E-Commerce Store</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
