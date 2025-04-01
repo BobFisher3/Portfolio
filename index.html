@@ -1,77 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connor Dickinson - Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connor Dickinson | Portfolio</title>
+  <meta name="description" content="Connor Dickinson - Aspiring IT Support Specialist, Developer, and Systems Administrator">
+  <meta property="og:title" content="Connor Dickinson | Portfolio">
+  <meta property="og:description" content="Check out my portfolio of projects, skills and experience in IT support, development, and system administration.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://bobfisher3.github.io/Portfolio/preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="clouds">
-      <img src="assets/images/cloud.png" alt="Cloud" class="cloud cloud1">
-      <img src="assets/images/cloud.png" alt="Cloud" class="cloud cloud2">
-      <img src="assets/images/cloud.png" alt="Cloud" class="cloud cloud3">
-    </div>
-    <h1 class="bouncing-name">Connor Dickinson</h1>
-    <p class="tagline">Creative Problem Solver & Aspiring Full-Stack Developer</p>
-  </section>
+<body data-aos-easing="ease" data-aos-duration="1000" data-aos-delay="0">
+  <!-- Body content will be filled later -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.getElementById('themeToggle').innerHTML = 
+        savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const width = bar.style.width;
+      bar.style.width = '0';
+      setTimeout(() => {
+        bar.style.width = width;
+      }, 500);
+    });
+  </script>
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      btn.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    }
+  </script>
+  <script>
+    const roles = ["Support Specialist", "Developer", "Systems Administrator", "Help Desk"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    const roleSpan = document.getElementById("role");
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      From an early age, I discovered my passion for technology by creating Minecraft mods in Java, sparking a deep curiosity for programming and problem-solving.
-      As I grew, my interest expanded to web development, where I enjoyed designing and building responsive websites.
-    </p>
-    <p>
-      In my free time, I thrive on challenging myself with personal projects that streamline everyday tasks. 
-      Currently, I'm developing video editing software to simplify and enhance creative workflows.
-    </p>
-    <p>
-      My ultimate career goal is to become a proficient full-stack developer, combining my technical expertise with a love for innovation.
-    </p>
-  </section>
+    function typeRole() {
+      if (charIndex <= roles[roleIndex].length) {
+        roleSpan.textContent = roles[roleIndex].substring(0, charIndex++);
+        setTimeout(typeRole, 100);
+      } else {
+        setTimeout(eraseRole, 2000);
+      }
+    }
 
-<!-- Projects Section -->
-<section id="projects">
-  <h2>Projects</h2>
-  <div class="project-list">
-    <!-- E-Commerce Project -->
-    <a href="Projects/e-commerce/index.html" target="_blank" class="project-link">
-      <div class="project-item">
-        <img src="assets/images/project1.jpg" alt="E-commerce Website">
-        <div class="project-hover">
-          <h3>E-commerce Website</h3>
-          <p>A responsive e-commerce platform prototype.</p>
-        </div>
-      </div>
-    </a>
+    function eraseRole() {
+      if (charIndex >= 0) {
+        roleSpan.textContent = roles[roleIndex].substring(0, charIndex--);
+        setTimeout(eraseRole, 50);
+      } else {
+        roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(typeRole, 500);
+      }
+    }
 
-    <!-- Inventory Management Tool -->
-    <div class="project-item">
-      <img src="assets/images/project2.jpg" alt="Inventory Management Tool">
-      <div class="project-hover">
-        <h3>Inventory Management Tool</h3>
-        <p>A Python-based inventory tracker with CRUD functionality.</p>
-      </div>
-    </div>
+    document.addEventListener("DOMContentLoaded", typeRole);
+  </script>
+  <script>
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-links a");
 
-    <!-- Portfolio Website -->
-    <div class="project-item">
-      <img src="assets/images/project3.jpg" alt="Portfolio Website">
-      <div class="project-hover">
-        <h3>Portfolio Website</h3>
-        <p>My personal portfolio showcasing skills and projects.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <footer>
-    <p>&copy; 2025 Connor Dickinson. All rights reserved.</p>
-  </footer>
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 100;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${current}`) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    };
+  </script>
 </body>
 </html>
